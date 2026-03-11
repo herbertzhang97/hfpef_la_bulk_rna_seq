@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LA HFpEF Pipeline · Night City</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Oxanium:wght@400;700;800&family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cyan:    #00CCFF;
+  --yellow:  #FFE000;
+  --orange:  #FF5500;
+  --red:     #FF1A1A;
+  --bg:      #050300;
+  --panel:   #0A0600;
+  --glow-cyan:   0 0 6px #00CCFF, 0 0 20px #00CCFF88, 0 0 40px #00CCFF44;
+  --glow-yellow: 0 0 6px #FFE000, 0 0 20px #FFE00088, 0 0 40px #FFE00044;
+  --glow-orange: 0 0 6px #FF5500, 0 0 20px #FF550088, 0 0 40px #FF550044;
+  --glow-red:    0 0 6px #FF1A1A, 0 0 20px #FF1A1A88, 0 0 40px #FF1A1A44;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: #000;
+  font-family: 'Rajdhani', sans-serif;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 3vh;
+}
+
+/* ── CITY BACKGROUND ── */
+.city-bg {
+  position: fixed; inset: 0;
+  background:
+    linear-gradient(180deg, #000005 0%, #020010 30%, #050008 60%, #080200 100%);
+  z-index: 0;
+}
+
+/* city skyline silhouette */
+.city-bg::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 45%;
+  background:
+    linear-gradient(180deg, transparent 0%, #050008 100%);
+  clip-path: polygon(
+    0% 100%, 0% 60%, 2% 60%, 2% 40%, 4% 40%, 4% 50%, 5% 50%, 5% 30%,
+    6% 30%, 6% 20%, 7% 20%, 7% 55%, 8% 55%, 8% 35%, 9% 35%, 9% 45%,
+    10% 45%, 10% 25%, 11% 25%, 11% 15%, 12% 15%, 12% 40%, 13% 40%,
+    13% 50%, 14% 50%, 14% 60%, 15% 60%, 15% 35%, 16% 35%, 16% 20%,
+    17% 20%, 17% 30%, 18% 30%, 18% 55%, 19% 55%, 19% 40%, 20% 40%,
+    20% 10%, 21% 10%, 21% 45%, 22% 45%, 22% 30%, 23% 30%, 23% 50%,
+    24% 50%, 24% 20%, 25% 20%, 25% 35%, 26% 35%, 26% 55%, 27% 55%,
+    27% 25%, 28% 25%, 28% 40%, 29% 40%, 29% 60%, 30% 60%, 30% 15%,
+    31% 15%, 31% 30%, 32% 30%, 32% 45%, 33% 45%, 33% 60%, 34% 60%,
+    34% 40%, 35% 40%, 35% 20%, 36% 20%, 36% 50%, 37% 50%, 37% 35%,
+    38% 35%, 38% 55%, 39% 55%, 39% 30%, 40% 30%, 40% 5%, 41% 5%,
+    41% 25%, 42% 25%, 42% 45%, 43% 45%, 43% 60%, 44% 60%, 44% 35%,
+    45% 35%, 45% 20%, 46% 20%, 46% 40%, 47% 40%, 47% 55%, 48% 55%,
+    48% 30%, 49% 30%, 49% 15%, 50% 15%, 50% 40%, 51% 40%, 51% 55%,
+    52% 55%, 52% 30%, 53% 30%, 53% 20%, 54% 20%, 54% 45%, 55% 45%,
+    55% 60%, 56% 60%, 56% 35%, 57% 35%, 57% 10%, 58% 10%, 58% 30%,
+    59% 30%, 59% 50%, 60% 50%, 60% 40%, 61% 40%, 61% 20%, 62% 20%,
+    62% 35%, 63% 35%, 63% 55%, 64% 55%, 64% 25%, 65% 25%, 65% 45%,
+    66% 45%, 66% 60%, 67% 60%, 67% 30%, 68% 30%, 68% 15%, 69% 15%,
+    69% 40%, 70% 40%, 70% 55%, 71% 55%, 71% 20%, 72% 20%, 72% 35%,
+    73% 35%, 73% 50%, 74% 50%, 74% 60%, 75% 60%, 75% 25%, 76% 25%,
+    76% 10%, 77% 10%, 77% 40%, 78% 40%, 78% 55%, 79% 55%, 79% 30%,
+    80% 30%, 80% 45%, 81% 45%, 81% 60%, 82% 60%, 82% 35%, 83% 35%,
+    83% 20%, 84% 20%, 84% 50%, 85% 50%, 85% 30%, 86% 30%, 86% 55%,
+    87% 55%, 87% 40%, 88% 40%, 88% 20%, 89% 20%, 89% 35%, 90% 35%,
+    90% 50%, 91% 50%, 91% 60%, 92% 60%, 92% 25%, 93% 25%, 93% 40%,
+    94% 40%, 94% 55%, 95% 55%, 95% 30%, 96% 30%, 96% 15%, 97% 15%,
+    97% 45%, 98% 45%, 98% 60%, 100% 60%, 100% 100%
+  );
+}
+
+/* atmospheric fog */
+.city-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 40% at 20% 80%, #FF550011 0%, transparent 60%),
+    radial-gradient(ellipse 60% 30% at 80% 90%, #FFE00008 0%, transparent 50%),
+    radial-gradient(ellipse 100% 50% at 50% 100%, #00CCFF06 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* ── RAIN ── */
+.rain-canvas {
+  position: fixed; inset: 0; z-index: 1;
+  pointer-events: none;
+}
+
+/* ── FLOATING BILLBOARD WRAPPER ── */
+.scene {
+  position: relative;
+  z-index: 10;
+  animation: float 6s ease-in-out infinite;
+  filter: drop-shadow(0 20px 40px #FF550022) drop-shadow(0 0 60px #FFE00008);
+  transform-origin: center center;
+  width: 95vw;
+  height: 70vh;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(0px); }
+}
+
+.scene::after {
+  content: '';
+  position: absolute;
+  bottom: -2vh; left: 10%; right: 10%;
+  height: 1.5vh;
+  background: radial-gradient(ellipse, #FF550044 0%, #FFE00022 40%, transparent 70%);
+  filter: blur(8px);
+  animation: glow-pulse 6s ease-in-out infinite;
+  border-radius: 50%;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.6; transform: scaleX(1); }
+  50%       { opacity: 1; transform: scaleX(0.85); }
+}
+
+/* ── MAIN BILLBOARD PANEL ── */
+.billboard {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0A0600 0%, #060300 50%, #080400 100%);
+  border: 1px solid #FF550066;
+  border-radius: 4px;
+  position: relative;
+  padding: 1vh 1.5vw 1vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vh;
+}
+
+/* corner brackets */
+.billboard::before, .billboard::after {
+  content: '';
+  position: absolute;
+  width: 20px; height: 20px;
+  border-color: #FF5500;
+  border-style: solid;
+  box-shadow: var(--glow-orange);
+}
+.billboard::before { top: 6px; left: 6px; border-width: 2px 0 0 2px; }
+.billboard::after  { bottom: 6px; right: 6px; border-width: 0 2px 2px 0; }
+
+/* scanline overlay */
+.scanlines {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.15) 2px,
+    rgba(0,0,0,0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 100;
+  border-radius: 4px;
+}
+
+/* holographic shimmer */
+.shimmer {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255,224,0,0.015) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 8s linear infinite;
+  pointer-events: none;
+  z-index: 99;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── TITLE ── */
+.title-row {
+  text-align: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.title-main {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(14px, 2.88vh, 38px);
+  font-weight: 900;
+  color: #FFE000;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-shadow: var(--glow-yellow);
+  animation: flicker-title 10s infinite;
+}
+
+@keyframes flicker-title {
+  0%,96%,100% { opacity: 1; text-shadow: var(--glow-yellow); }
+  97%          { opacity: 0.85; text-shadow: none; }
+  98%          { opacity: 1; text-shadow: var(--glow-yellow); }
+  99%          { opacity: 0.9; }
+}
+
+.title-sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(8px, 1.32vh, 17px);
+  color: #AA9966;
+  letter-spacing: 0.15em;
+  margin-top: 0.3vh;
+}
+
+/* decorative title line */
+.title-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #FF5500, #FFE000, #FF5500, transparent);
+  box-shadow: 0 0 8px #FF5500;
+  flex-shrink: 0;
+}
+
+/* ── UPSTREAM ROW ── */
+.upstream-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6vw;
+  background: rgba(0,204,255,0.04);
+  border: 1px solid #00CCFF66;
+  border-radius: 3px;
+  padding: 0 1.2vw;
+  position: relative;
+  box-shadow: inset 0 0 20px #00CCFF08, 0 0 15px #00CCFF22;
+  flex: 2;
+  min-height: 0;
+}
+
+.upstream-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(12px, 2.16vh, 26px);
+  color: #00CCFF;
+  text-shadow: var(--glow-cyan);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  margin-right: 0.4vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  line-height: 1.3;
+}
+
+.badge {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(12px, 1.92vh, 24px);
+  font-weight: 700;
+  background: #00CCFF22;
+  border: 1px solid #00CCFF;
+  border-radius: 50%;
+  width: clamp(29px, 4.2vh, 50px);
+  height: clamp(29px, 4.2vh, 50px);
+  display: flex; align-items: center; justify-content: center;
+  color: #00CCFF;
+  text-shadow: var(--glow-cyan);
+  box-shadow: var(--glow-cyan);
+  flex-shrink: 0;
+}
+
+.input-box {
+  border: 1px solid #00CCFF55;
+  border-radius: 2px;
+  padding: 0.5vh 0.8vw;
+  text-align: center;
+  flex-shrink: 0;
+}
+.input-box .label { font-family:'Orbitron',monospace; font-size:clamp(13px, 2.4vh, 31px); font-weight:700; color:#00CCFF; text-shadow:var(--glow-cyan); }
+.input-box .sub   { font-size:clamp(10px, 1.68vh, 22px); color:#0099BB; font-family:'Share Tech Mono',monospace; }
+
+.arrow {
+  color: #00CCFF;
+  font-size: clamp(17px, 2.88vh, 36px);
+  text-shadow: var(--glow-cyan);
+  flex-shrink: 0;
+  animation: pulse-arrow 2s ease-in-out infinite;
+}
+@keyframes pulse-arrow {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
+
+.tool-box {
+  flex: 1;
+  border: 1px solid #00CCFF44;
+  border-radius: 2px;
+  padding: 0.5vh 0.5vw;
+  text-align: center;
+  background: rgba(0,204,255,0.05);
+}
+.tool-box .tname { font-family:'Orbitron',monospace; font-size:clamp(13px, 2.4vh, 31px); font-weight:700; color:#00CCFF; text-shadow:var(--glow-cyan); }
+.tool-box .tsub  { font-size:clamp(10px, 1.68vh, 22px); color:#0088AA; font-family:'Share Tech Mono',monospace; }
+
+.output-box {
+  border: 1px solid #00CCFF55;
+  border-radius: 2px;
+  padding: 0.5vh 0.8vw;
+  text-align: right;
+  flex-shrink: 0;
+}
+.output-box .label { font-family:'Share Tech Mono',monospace; font-size:clamp(10px, 1.68vh, 22px); color:#00CCFF; text-shadow:var(--glow-cyan); }
+
+/* ── BRANCH ROWS ── */
+.branches { display: flex; flex-direction: column; gap: 0.8vh; flex: 7; min-height: 0; }
+
+.branch-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.6vw;
+  flex: 1;
+  min-height: 0;
+}
+
+.branch-tag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 5.5vw;
+  flex-shrink: 0;
+  border-radius: 3px;
+  padding: 1vh 0.5vw;
+  font-family: 'Orbitron', monospace;
+}
+.branch-tag .letter {
+  font-size: clamp(24px, 5.4vh, 72px);
+  font-weight: 900;
+  line-height: 1;
+}
+.branch-tag .bname {
+  font-size: clamp(7px, 1.32vh, 17px);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-align: center;
+  margin-top: 0.3vh;
+  text-transform: uppercase;
+}
+
+.branch-arrow {
+  display: flex;
+  align-items: center;
+  color: #555;
+  font-size: clamp(12px, 1.8vh, 24px);
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.nodes { display: flex; gap: 0.5vw; flex: 1; min-width: 0; }
+
+.node {
+  flex: 1;
+  border-radius: 3px;
+  padding: 0.5vh 0.8vw;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+.node::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+.node-num {
+  position: absolute;
+  top: 0.4vh; right: 0.4vw;
+  font-family: 'Oxanium', monospace;
+  font-size: clamp(22px, 4.05vh, 54px);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  opacity: 0.9;
+}
+.node-name {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(11px, 2.16vh, 29px);
+  font-weight: 700;
+  margin-bottom: 0.3vh;
+  padding-right: 1.5vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.node-desc {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(8px, 1.44vh, 19px);
+  opacity: 0.75;
+  line-height: 1.4;
+}
+
+/* branch-specific node arrow between nodes */
+.node-arrow {
+  display: flex;
+  align-items: center;
+  font-size: clamp(10px, 1.44vh, 19px);
+  flex-shrink: 0;
+  animation: pulse-arrow 2.5s ease-in-out infinite;
+}
+
+/* ── BRANCH A — YELLOW/GOLD ── */
+.branch-a .branch-tag {
+  background: rgba(255,224,0,0.06);
+  border: 1px solid #FFE000AA;
+  box-shadow: var(--glow-yellow), inset 0 0 15px #FFE00008;
+  color: #FFE000;
+  text-shadow: var(--glow-yellow);
+}
+.branch-a .node {
+  background: rgba(255,224,0,0.04);
+  border: 1px solid #FFE00066;
+  color: #FFE000;
+}
+.branch-a .node:hover {
+  background: rgba(255,224,0,0.09);
+  box-shadow: var(--glow-yellow);
+  transition: all 0.3s;
+}
+.branch-a .node-name  { color: #FFE000; text-shadow: var(--glow-yellow); }
+.branch-a .node-num   { color: #CC9900; }
+.branch-a .node-desc  { color: #CC9900; }
+.branch-a .node-arrow { color: #FFE000; text-shadow: var(--glow-yellow); }
+.branch-a .branch-arrow { color: #FFE00066; }
+
+/* ── BRANCH B — ORANGE ── */
+.branch-b .branch-tag {
+  background: rgba(255,85,0,0.06);
+  border: 1px solid #FF5500AA;
+  box-shadow: var(--glow-orange), inset 0 0 15px #FF550008;
+  color: #FF5500;
+  text-shadow: var(--glow-orange);
+}
+.branch-b .node {
+  background: rgba(255,85,0,0.04);
+  border: 1px solid #FF550066;
+  color: #FF5500;
+}
+.branch-b .node:hover {
+  background: rgba(255,85,0,0.09);
+  box-shadow: var(--glow-orange);
+  transition: all 0.3s;
+}
+.branch-b .node-name  { color: #FF5500; text-shadow: var(--glow-orange); }
+.branch-b .node-num   { color: #CC3300; }
+.branch-b .node-desc  { color: #CC3300; }
+.branch-b .node-arrow { color: #FF5500; text-shadow: var(--glow-orange); }
+.branch-b .branch-arrow { color: #FF550066; }
+
+/* ── BRANCH C — RED ── */
+.branch-c .branch-tag {
+  background: rgba(255,26,26,0.06);
+  border: 1px solid #FF1A1AAA;
+  box-shadow: var(--glow-red), inset 0 0 15px #FF1A1A08;
+  color: #FF1A1A;
+  text-shadow: var(--glow-red);
+}
+.branch-c .node {
+  background: rgba(255,26,26,0.04);
+  border: 1px solid #FF1A1A66;
+  color: #FF1A1A;
+}
+.branch-c .node:hover {
+  background: rgba(255,26,26,0.09);
+  box-shadow: var(--glow-red);
+  transition: all 0.3s;
+}
+.branch-c .node-name  { color: #FF1A1A; text-shadow: var(--glow-red); }
+.branch-c .node-num   { color: #FF4444; font-size: clamp(22px, 4.05vh, 54px); }
+.branch-c .node-desc  { color: #BB0000; }
+.branch-c .node-arrow { color: #FF1A1A; text-shadow: var(--glow-red); }
+.branch-c .branch-arrow { color: #FF1A1A66; }
+
+/* ── LEGEND ── */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 2vw;
+  padding-top: 0.6vh;
+  border-top: 1px solid #222;
+  flex-shrink: 0;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(9px, 1.35vh, 18px);
+}
+.legend-dot {
+  width: clamp(12px, 1.5vh, 21px);
+  height: clamp(12px, 1.5vh, 21px);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+.ld-cyan   { background:#00CCFF; box-shadow: var(--glow-cyan); }
+.ld-yellow { background:#FFE000; box-shadow: var(--glow-yellow); }
+.ld-orange { background:#FF5500; box-shadow: var(--glow-orange); }
+.ld-red    { background:#FF1A1A; box-shadow: var(--glow-red); }
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  margin-top: 0.3vh;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(6px, 0.96vh, 12px);
+  color: #444;
+  letter-spacing: 0.15em;
+  flex-shrink: 0;
+}
+
+/* ── AMBIENT NEON SIGNS (background decoration) ── */
+.neon-sign {
+  position: fixed;
+  font-family: 'Orbitron', monospace;
+  pointer-events: none;
+  z-index: 15;
+  animation: sign-flicker 7s infinite;
+}
+@keyframes sign-flicker {
+  0%,90%,100% { opacity: 0.6; }
+  91%          { opacity: 0.1; }
+  92%          { opacity: 0.6; }
+  95%          { opacity: 0.2; }
+  96%          { opacity: 0.6; }
+}
+.sign-1 {
+  bottom: 14vh; left: 2%;
+  font-size: 10px; color: #FF1A1A;
+  text-shadow: var(--glow-red);
+  writing-mode: vertical-rl;
+  letter-spacing: 5px;
+}
+.sign-2 {
+  bottom: 28vh; right: 5%;
+  font-size: 9px; color: #FFE000;
+  text-shadow: var(--glow-yellow);
+  letter-spacing: 3px;
+  animation-delay: 2s;
+}
+.sign-3 {
+  bottom: 14vh; left: 12%;
+  font-size: 8px; color: #00CCFF;
+  text-shadow: var(--glow-cyan);
+  letter-spacing: 2px;
+  animation-delay: 4s;
+}
+.sign-4 {
+  bottom: 14vh; right: 2%;
+  font-size: 10px; color: #FF5500;
+  text-shadow: var(--glow-orange);
+  writing-mode: vertical-rl;
+  letter-spacing: 5px;
+  animation-delay: 1s;
+}
+/* ── HOVER DETAIL PANEL ── */
+.info-detail {
+  position: fixed;
+  bottom: 2vh; left: 50%;
+  transform: translateX(-50%);
+  width: 72vw;
+  background: rgba(5,3,0,0.92);
+  border-radius: 4px;
+  padding: 1.8vh 2.5vw;
+  z-index: 20;
+  backdrop-filter: blur(8px);
+  border: 1px solid #222;
+  transition: border-color 0.25s, box-shadow 0.25s, opacity 0.25s;
+}
+.info-detail.color-cyan   { border-color: #00CCFF88; box-shadow: 0 0 40px #00CCFF18, inset 0 0 40px #00CCFF06; }
+.info-detail.color-yellow { border-color: #FFE00088; box-shadow: 0 0 40px #FFE00018, inset 0 0 40px #FFE00006; }
+.info-detail.color-orange { border-color: #FF550088; box-shadow: 0 0 40px #FF550018, inset 0 0 40px #FF550006; }
+.info-detail.color-red    { border-color: #FF1A1A88; box-shadow: 0 0 40px #FF1A1A18, inset 0 0 40px #FF1A1A06; }
+
+.id-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2vw;
+  border-bottom: 1px solid #222;
+  padding-bottom: 0.8vh;
+  margin-bottom: 0.8vh;
+}
+.id-num {
+  font-family: 'Oxanium', monospace;
+  font-size: clamp(18px, 3vh, 40px);
+  font-weight: 800;
+  line-height: 1;
+  transition: color 0.25s, text-shadow 0.25s;
+}
+.id-name {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(10px, 1.6vh, 20px);
+  font-weight: 700;
+  transition: color 0.25s;
+}
+.info-detail.color-cyan   .id-num,
+.info-detail.color-cyan   .id-name { color: #00CCFF; text-shadow: var(--glow-cyan); }
+.info-detail.color-yellow .id-num,
+.info-detail.color-yellow .id-name { color: #FFE000; text-shadow: var(--glow-yellow); }
+.info-detail.color-orange .id-num,
+.info-detail.color-orange .id-name { color: #FF5500; text-shadow: var(--glow-orange); }
+.info-detail.color-red    .id-num,
+.info-detail.color-red    .id-name { color: #FF4444; text-shadow: var(--glow-red); }
+
+.id-desc {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(9px, 1.3vh, 17px);
+  color: #DDCCBB;
+  line-height: 1.65;
+  margin-bottom: 0.6vh;
+}
+.id-tools {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(8px, 1.1vh, 14px);
+  color: #555;
+  letter-spacing: 0.06em;
+}
+.id-hint {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(7px, 0.9vh, 11px);
+  color: #2a2a2a;
+  letter-spacing: 0.2em;
+  text-align: center;
+  margin-top: 1vh;
+  transition: opacity 0.3s;
+}
+.info-detail.active .id-hint { display: none; }
+.id-body {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0 1.5vw;
+  margin-bottom: 0.6vh;
+}
+.id-divider { background: #222; }
+.id-en { color: #DDEEFF; }
+.id-zh { color: #FFEECC; }
+.id-en::before { content: 'EN '; font-size: 0.75em; color: #445566; letter-spacing: 0.1em; }
+.id-zh::before { content: '中  '; font-size: 0.75em; color: #554433; letter-spacing: 0.1em; }
+
+</style>
+</head>
+<body>
+
+<div class="city-bg"></div>
+<canvas class="rain-canvas" id="rain"></canvas>
+
+<!-- ambient neon signs -->
+<div class="neon-sign sign-1">転写解析</div>
+<div class="neon-sign sign-2">LOUGHREY LAB · UNIVERSITY OF GLASGOW</div>
+<div class="neon-sign sign-3">RNA//ATLAS v2.0</div>
+<div class="neon-sign sign-4">左房データ</div>
+
+<div class="scene">
+  <div class="billboard">
+    <div class="scanlines"></div>
+    <div class="shimmer"></div>
+
+    <!-- TITLE -->
+    <div class="title-row">
+      <div class="title-main">Multi-Layer Bulk RNA-seq Analysis Pipeline</div>
+      <div class="title-sub">LA HFpEF MODEL &nbsp;·&nbsp; HFD + L-NAME TWO-HIT &nbsp;·&nbsp; CTRL vs 2HM &nbsp;·&nbsp; GRCm39 / GENCODE M38</div>
+    </div>
+    <div class="title-line"></div>
+
+    <!-- UPSTREAM -->
+    <div class="upstream-row" data-num="01" data-name="01_upstream_pipeline.sh" data-color="cyan"
+      data-desc="fastp QC + 接头剪除 → STAR splice-aware 比对（GRCm39）→ featureCounts 基因计数 → MultiQC 汇总报告。N=10 paired-end 样本，输出 count_matrix.txt、BAM 文件与 MultiQC HTML 质控报告。"
+      data-desc-en="Raw FASTQ quality control and adapter trimming via fastp, splice-aware alignment to GRCm39 with STAR, gene-level counting with featureCounts, and aggregated QC reporting via MultiQC. Outputs count_matrix.txt, BAM files, and an HTML QC report."
+      data-tools="fastp · STAR · featureCounts (subread) · MultiQC · samtools">
+      <div class="badge">01</div>
+      <div class="upstream-label">
+        <div>SHARED UPSTREAM</div>
+        <div style="font-size:0.8em; opacity:0.75;">01_upstream_pipeline.sh</div>
+      </div>
+
+      <div class="input-box">
+        <div class="label">FASTQ</div>
+        <div class="sub">raw · N=10 · PE</div>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <div class="tool-box">
+        <div class="tname">fastp</div>
+        <div class="tsub">QC + trim</div>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <div class="tool-box">
+        <div class="tname">STAR</div>
+        <div class="tsub">Alignment · GRCm39</div>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <div class="tool-box">
+        <div class="tname">featureCounts</div>
+        <div class="tsub">Gene-level counts</div>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <div class="tool-box">
+        <div class="tname">MultiQC</div>
+        <div class="tsub">Aggregate QC</div>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <div class="output-box">
+        <div class="label">count_matrix.txt<br>*.bam · MultiQC.html</div>
+      </div>
+    </div>
+
+    <!-- BRANCHES -->
+    <div class="branches">
+
+      <!-- BRANCH A -->
+      <div class="branch-row branch-a">
+        <div class="branch-tag">
+          <div class="letter">A</div>
+          <div class="bname">Gene-Level<br>Analysis</div>
+        </div>
+        <div class="branch-arrow">→</div>
+        <div class="nodes">
+          <div class="node" data-num="02" data-name="02_deseq2_gene.R" data-color="yellow"
+            data-desc="DESeq2 CTRL vs 2HM 差异表达分析，apeglm LFC 收缩，VST 标准化矩阵输出。生成 PCA、volcano、MA plot 与样本距离热图，完整结果表含 padj、log2FC、baseMean。"
+            data-desc-en="Differential expression analysis between CTRL and 2HM using DESeq2 with apeglm LFC shrinkage. Outputs VST-normalised matrix, PCA, volcano plot, MA plot, and sample distance heatmap. Full results table includes padj, log2FC, and baseMean."
+            data-tools="DESeq2 · apeglm · ggplot2 · pheatmap · dplyr">
+            <div class="node-num">02</div>
+            <div class="node-name">DESeq2</div>
+            <div class="node-desc">CTRL vs 2HM<br>apeglm · VST</div>
+          </div>
+          <div class="node-arrow">→</div>
+          <div class="node" data-num="03" data-name="03_gsea_pathway.R" data-color="yellow"
+            data-desc="fgsea 驱动的 MSigDB Hallmark（50 个通路）与 GO:BP 基因集富集分析，基于 DESeq2 log2FC 排序统计量，输出 NES 条形图与 GSEA 富集曲线。"
+            data-desc-en="Fast GSEA (fgsea) on MSigDB Hallmark (50 gene sets) and GO:BP collections, ranked by DESeq2 log2FC statistic. Outputs normalised enrichment score barplots and GSEA enrichment curves for significant pathways."
+            data-tools="fgsea · msigdbr · ggplot2 · dplyr">
+            <div class="node-num">03</div>
+            <div class="node-name">GSEA</div>
+            <div class="node-desc">Hallmark<br>GO:BP · fgsea</div>
+          </div>
+          <div class="node-arrow">→</div>
+          <div class="node" data-num="04" data-name="04_gsea_advanced.R" data-color="yellow"
+            data-desc="基于 enrichplot 的通路富集图网络（enrichment map），DoRothEA 推断转录因子活性（decoupleR），leading-edge 基因热图与调控网络可视化。"
+            data-desc-en="Pathway enrichment network (enrichment map) via enrichplot, transcription factor activity inference using DoRothEA and decoupleR, leading-edge gene heatmap, and regulatory network visualisation with igraph/ggraph."
+            data-tools="decoupleR · igraph · ggraph · enrichplot · clusterProfiler">
+            <div class="node-num">04</div>
+            <div class="node-name">Adv. GSEA</div>
+            <div class="node-desc">Emap · TF activity<br>DoRothEA</div>
+          </div>
+          <div class="node-arrow">→</div>
+          <div class="node" data-num="05" data-name="05_trait_wgcna.R" data-color="yellow"
+            data-desc="limma 线性模型构建表型关联（体重、血压、心脏重量等），基因层 WGCNA 软阈值选择、blockwiseModules 模块检测，模块-表型相关热图与 hub 基因鉴定（set.seed=42）。"
+            data-desc-en="limma linear models for trait association (body weight, blood pressure, heart weight etc.), followed by gene-level WGCNA soft-thresholding, blockwiseModules co-expression module detection, module–trait correlation heatmap, and hub gene identification (set.seed=42)."
+            data-tools="limma · WGCNA · ggplot2 · patchwork · dplyr">
+            <div class="node-num">05</div>
+            <div class="node-name">limma + WGCNA</div>
+            <div class="node-desc">Trait models<br>Module–trait</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BRANCH B -->
+      <div class="branch-row branch-b">
+        <div class="branch-tag">
+          <div class="letter">B</div>
+          <div class="bname">Transcript<br>Discovery</div>
+        </div>
+        <div class="branch-arrow">→</div>
+        <div class="nodes">
+          <div class="node" data-num="06" data-name="06_stringtie_pipeline.sh" data-color="orange"
+            data-desc="StringTie 每样本独立组装转录本 → 合并 GTF（stringtie --merge）→ gffcompare 与参考注释比对（class codes）→ re-quantification → prepDE.py 生成基因与转录本计数矩阵。"
+            data-desc-en="Per-sample transcript assembly with StringTie, merged GTF construction, annotation comparison against GENCODE M38 via gffcompare (class codes), re-quantification, and count matrix generation using prepDE.py for both gene and transcript levels."
+            data-tools="StringTie · gffcompare · prepDE · samtools">
+            <div class="node-num">06</div>
+            <div class="node-name">StringTie</div>
+            <div class="node-desc">Assembly → merge<br>gffcompare · prepDE</div>
+          </div>
+          <div class="node-arrow">→</div>
+          <div class="node" data-num="07" data-name="07_novel_characterisation.sh" data-color="orange"
+            data-desc="CPAT 评分（cutoff=0.364）筛选非编码新转录本，bedtools 窗口化 cis-target 注释，生成新转录本特征化综合表（长度、外显子数、CPAT 分、最近基因）。"
+            data-desc-en="CPAT coding potential scoring (cutoff=0.364) classifies novel transcripts as lncRNA or coding. Bedtools windowed cis-target annotation identifies nearest genes. Outputs a comprehensive characterisation table with length, exon count, CPAT score, and nearest gene."
+            data-tools="CPAT · bedtools · awk · samtools">
+            <div class="node-num">07</div>
+            <div class="node-name">CPAT</div>
+            <div class="node-desc">Coding potential<br>Cis-target ID</div>
+          </div>
+          <div class="node-arrow">→</div>
+          <div class="node" data-num="08" data-name="08_deseq2_novel_transcripts.R" data-color="orange"
+            data-desc="基于 gffcompare class code 过滤真正新转录本（u/x/i/o 类），tximport 导入 StringTie 定量，DESeq2 差异分析，isoform 水平差异热图与 volcano 图。"
+            data-desc-en="Filters genuinely novel transcripts using gffcompare class codes (u/x/i/o), imports StringTie quantification via tximport, and runs DESeq2 differential expression at isoform level. Outputs isoform-level heatmap and volcano plot."
+            data-tools="DESeq2 · tximport · ggplot2 · dplyr">
+            <div class="node-num">08</div>
+            <div class="node-name">DESeq2 (tx)</div>
+            <div class="node-desc">Novel transcripts<br>Isoform-level DE</div>
+          </div>
+          <div class="node-arrow">→</div>
+          <div class="node" data-num="09" data-name="09_wgcna_coexpression.R" data-color="orange"
+            data-desc="转录本层 WGCNA 软阈值拟合，blockwiseModules 共表达模块检测，guilt-by-association 对未知转录本进行功能预测，输出模块成员分与 hub 转录本列表。"
+            data-desc-en="Transcript-level WGCNA soft-thresholding and blockwiseModules co-expression network. Guilt-by-association links novel transcripts to known functional modules. Outputs module membership scores and a ranked hub transcript list."
+            data-tools="WGCNA · ggplot2 · patchwork · dplyr">
+            <div class="node-num">09</div>
+            <div class="node-name">WGCNA (tx)</div>
+            <div class="node-desc">Co-expression<br>Guilt-by-assoc.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BRANCH C -->
+      <div class="branch-row branch-c">
+        <div class="branch-tag">
+          <div class="letter">C</div>
+          <div class="bname">Alt.<br>Splicing</div>
+        </div>
+        <div class="branch-arrow">→</div>
+        <div class="nodes">
+          <div class="node" data-num="10" data-name="10_rmats.sh" data-color="red"
+            data-desc="rMATS-turbo 检测五类差异剪接事件（SE/MXE/A5SS/A3SS/RI），CTRL vs 2HM，FDR ＜ 0.05 且 |ΔPSI| ≥ 0.1 双阈值过滤，ΔPSI 符号约定为 2HM−CTRL。"
+            data-desc-en="rMATS-turbo detects five splicing event types (SE/MXE/A5SS/A3SS/RI) between CTRL and 2HM. Events are filtered at FDR < 0.05 and |ΔPSI| ≥ 0.1. ΔPSI sign convention is 2HM−CTRL throughout."
+            data-tools="rMATS-turbo · samtools · Python 3.8 (rmats_env)">
+            <div class="node-num">10</div>
+            <div class="node-name">rMATS-turbo</div>
+            <div class="node-desc">SE/MXE/A5SS<br>A3SS/RI · FDR+ΔPSI</div>
+          </div>
+          <div class="node-arrow">→</div>
+          <div class="node" data-num="11" data-name="11_batch_sashimi.sh" data-color="red"
+            data-desc="rmats2sashimiplot 批量绘制心脏基因白名单中显著剪接事件的 sashimi 图，直观展示剪接位点读段支持与 PSI 差异，输出 PDF/PNG。"
+            data-desc-en="Batch sashimi plot generation via rmats2sashimiplot for significant splicing events in a cardiac gene whitelist. Visualises splice junction read support and PSI differences per event. Outputs PDF and PNG figures."
+            data-tools="rmats2sashimiplot · samtools · Python (rmats_env)">
+            <div class="node-num">11</div>
+            <div class="node-name">Sashimi Plots</div>
+            <div class="node-desc">rmats2sashimiplot<br>Cardiac gene WL</div>
+          </div>
+          <div class="node-arrow">→</div>
+          <div class="node" data-num="12" data-name="12_splicing_plots.R" data-color="red"
+            data-desc="五类剪接事件汇总条形图，PSI 分布 volcano 图（ΔPSI vs −log10 FDR），各事件类型详细结果表，publication-ready 图表批量导出。"
+            data-desc-en="Summary barplots for all five splicing event types, PSI distribution volcano plot (ΔPSI vs −log10 FDR), per-event-type detailed results tables, and batch export of publication-ready figures."
+            data-tools="ggplot2 · patchwork · dplyr · tidyr">
+            <div class="node-num">12</div>
+            <div class="node-name">Splicing Plots</div>
+            <div class="node-desc">PSI volcano<br>Event barplots</div>
+          </div>
+          <div class="node-arrow">→</div>
+          <div class="node" data-num="13" data-name="13_splicing_enrichment.R" data-color="red"
+            data-desc="提取显著差异剪接基因集，clusterProfiler GO（BP/MF/CC）与 KEGG 富集分析，dotplot 与 barplot 可视化，富集结果表导出。"
+            data-desc-en="GO (BP/MF/CC) and KEGG enrichment analysis on differentially spliced gene sets using clusterProfiler. Outputs dotplots, barplots, and enrichment result tables for downstream interpretation."
+            data-tools="clusterProfiler · enrichplot · org.Mm.eg.db · ggplot2">
+            <div class="node-num">13</div>
+            <div class="node-name">Enrichment</div>
+            <div class="node-desc">GO/KEGG on<br>spliced gene sets</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /branches -->
+
+    <!-- LEGEND -->
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot ld-cyan"></div><span style="color:#00CCFF">Shared Upstream (01)</span></div>
+      <div class="legend-item"><div class="legend-dot ld-yellow"></div><span style="color:#FFE000">Branch A — Gene-level (02–05)</span></div>
+      <div class="legend-item"><div class="legend-dot ld-orange"></div><span style="color:#FF5500">Branch B — Transcript (06–09)</span></div>
+      <div class="legend-item"><div class="legend-dot ld-red"></div><span style="color:#FF1A1A">Branch C — Splicing (10–13)</span></div>
+    </div>
+
+
+  </div>
+</div>
+
+<!-- ── INFO DETAIL (hover-driven) ── -->
+<div class="info-detail" id="infoDetail">
+  <div class="id-header">
+    <span class="id-num" id="idNum"></span>
+    <span class="id-name" id="idName"></span>
+  </div>
+  <div class="id-body">
+    <div class="id-desc id-en" id="idDescEn"></div>
+    <div class="id-divider"></div>
+    <div class="id-desc id-zh" id="idDescZh"></div>
+  </div>
+  <div class="id-tools" id="idTools"></div>
+  <div class="id-hint">HOVER MODULE TO INSPECT · 悬停模块查看详情</div>
+</div>
+
+<script>
+// ── RAIN ──
+const canvas = document.getElementById('rain');
+const ctx = canvas.getContext('2d');
+canvas.width  = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const drops = Array.from({length: 200}, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  len: Math.random() * 18 + 8,
+  speed: Math.random() * 6 + 8,
+  opacity: Math.random() * 0.25 + 0.05,
+  width: Math.random() < 0.15 ? 1.5 : 0.5,
+}));
+
+function drawRain() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drops.forEach(d => {
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(100,160,255,${d.opacity})`;
+    ctx.lineWidth = d.width;
+    ctx.moveTo(d.x, d.y);
+    ctx.lineTo(d.x - d.len * 0.15, d.y + d.len);
+    ctx.stroke();
+
+    d.y += d.speed;
+    d.x -= d.speed * 0.15;
+    if (d.y > canvas.height) {
+      d.y = -d.len;
+      d.x = Math.random() * canvas.width;
+    }
+  });
+  requestAnimationFrame(drawRain);
+}
+drawRain();
+
+// ── STAGGERED CARD ANIMATION ──
+document.querySelectorAll('.info-card').forEach((card, i) => {
+  card.style.animationDelay = `${0.3 + i * 0.07}s`;
+});
+
+// ── MODULE HOVER DETAIL ──
+const detail    = document.getElementById('infoDetail');
+const idNum     = document.getElementById('idNum');
+const idName    = document.getElementById('idName');
+const idDesc    = document.getElementById('idDesc');
+const idTools   = document.getElementById('idTools');
+
+const colorClasses = ['color-cyan','color-yellow','color-orange','color-red'];
+
+function showDetail(el) {
+  const num    = el.dataset.num;
+  const name   = el.dataset.name;
+  const desc   = el.dataset.desc   || '';
+  const descEn = el.dataset.descEn || '';
+  const tools  = el.dataset.tools  || '';
+  const color  = el.dataset.color;
+  idNum.textContent = num;
+  idName.textContent = name;
+  document.getElementById('idDescEn').textContent = descEn;
+  document.getElementById('idDescZh').textContent = desc;
+  idTools.textContent = '// ' + tools;
+  detail.classList.remove(...colorClasses);
+  detail.classList.add('color-' + color, 'active');
+}
+
+function hideDetail() {
+  detail.classList.remove('active', ...colorClasses);
+  idNum.textContent = idName.textContent = idTools.textContent = '';
+  document.getElementById('idDescEn').textContent = '';
+  document.getElementById('idDescZh').textContent = '';
+}
+
+document.querySelectorAll('.node[data-num], .upstream-row[data-num]').forEach(el => {
+  el.style.cursor = 'crosshair';
+  el.addEventListener('mouseenter', () => showDetail(el));
+  el.addEventListener('mouseleave', hideDetail);
+});
+
+window.addEventListener('resize', () => {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+</body>
+</html>
