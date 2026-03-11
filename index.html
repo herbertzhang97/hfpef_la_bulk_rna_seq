@@ -678,74 +678,74 @@ body {
 
   .scene {
     width: 99vw;
-    height: 66vh;
+    height: 80vh;
   }
 
   .billboard {
-    padding: 0.3vh 0.8vw;
-    gap: 0.3vh;
+    padding: 0.6vh 1vw;
+    gap: 0.5vh;
   }
 
   /* title */
-  .title-main { font-size: clamp(8px, 1.8vh, 16px); letter-spacing: 0.08em; }
-  .title-sub  { font-size: clamp(6px, 0.95vh, 10px); margin-top: 0.1vh; }
+  .title-main { font-size: clamp(10px, 2.4vh, 20px); letter-spacing: 0.1em; }
+  .title-sub  { font-size: clamp(7px, 1.2vh, 12px); margin-top: 0.2vh; }
   .title-line { height: 1px; }
 
   /* upstream */
-  .upstream-row { flex: 1.1; padding: 0 0.6vw; gap: 0.35vw; }
+  .upstream-row { flex: 1.1; padding: 0 0.8vw; gap: 0.5vw; }
   .badge {
-    width: clamp(16px, 2.8vh, 26px);
-    height: clamp(16px, 2.8vh, 26px);
-    font-size: clamp(7px, 1.3vh, 13px);
+    width: clamp(20px, 3.4vh, 32px);
+    height: clamp(20px, 3.4vh, 32px);
+    font-size: clamp(9px, 1.7vh, 16px);
   }
-  .upstream-label { font-size: clamp(7px, 1.3vh, 13px); }
-  .tool-box .tname { font-size: clamp(7px, 1.3vh, 13px); }
-  .tool-box .tsub  { font-size: clamp(5px, 0.95vh, 9px); }
+  .upstream-label { font-size: clamp(9px, 1.7vh, 16px); }
+  .tool-box .tname { font-size: clamp(9px, 1.7vh, 16px); }
+  .tool-box .tsub  { font-size: clamp(6px, 1.1vh, 11px); }
   .input-box .label,
-  .output-box .label { font-size: clamp(5px, 0.95vh, 9px); }
-  .arrow { font-size: clamp(7px, 1.1vh, 11px); }
+  .output-box .label { font-size: clamp(6px, 1.1vh, 11px); }
+  .arrow { font-size: clamp(9px, 1.4vh, 13px); }
 
   /* branches */
-  .branches { gap: 0.3vh; flex: 6.5; }
-  .branch-row { gap: 0.25vw; }
+  .branches { gap: 0.5vh; flex: 6.5; }
+  .branch-row { gap: 0.4vw; }
   .branch-tag {
-    width: 4vw;
-    padding: 0.4vh 0.2vw;
+    width: 5vw;
+    padding: 0.5vh 0.3vw;
   }
-  .branch-tag .letter { font-size: clamp(13px, 2.7vh, 24px); }
-  .branch-tag .bname  { font-size: clamp(4px, 0.8vh, 8px); margin-top: 0.1vh; }
-  .branch-arrow { font-size: clamp(7px, 1vh, 11px); }
+  .branch-tag .letter { font-size: clamp(16px, 3.4vh, 30px); }
+  .branch-tag .bname  { font-size: clamp(5px, 1vh, 10px); margin-top: 0.2vh; }
+  .branch-arrow { font-size: clamp(9px, 1.3vh, 13px); }
 
   /* nodes */
-  .nodes { gap: 0.25vw; }
-  .node { padding: 0.25vh 0.4vw; }
-  .node-num  { font-size: clamp(11px, 2.1vh, 20px); top: 0.15vh; right: 0.25vw; }
-  .node-name { font-size: clamp(6px, 1.2vh, 12px); margin-bottom: 0.1vh; padding-right: 0.8vw; }
-  .node-desc { font-size: clamp(5px, 0.85vh, 8px); line-height: 1.2; }
-  .node-arrow { font-size: clamp(6px, 0.9vh, 9px); }
+  .nodes { gap: 0.4vw; }
+  .node { padding: 0.5vh 0.6vw; }
+  .node-num  { font-size: clamp(14px, 2.8vh, 26px); top: 0.3vh; right: 0.4vw; }
+  .node-name { font-size: clamp(8px, 1.6vh, 15px); margin-bottom: 0.2vh; padding-right: 1.2vw; }
+  .node-desc { font-size: clamp(6px, 1.05vh, 10px); line-height: 1.35; }
+  .node-arrow { font-size: clamp(8px, 1.1vh, 11px); }
 
   /* legend */
-  .legend { padding-top: 0.25vh; gap: 1.2vw; }
-  .legend-item { font-size: clamp(5px, 0.85vh, 9px); gap: 0.25vw; }
-  .legend-dot  { width: clamp(6px, 0.9vh, 9px); height: clamp(6px, 0.9vh, 9px); }
+  .legend { padding-top: 0.4vh; gap: 1.5vw; }
+  .legend-item { font-size: clamp(7px, 1.05vh, 11px); gap: 0.4vw; }
+  .legend-dot  { width: clamp(8px, 1.1vh, 11px); height: clamp(8px, 1.1vh, 11px); }
 
-  /* info detail panel — compact single column */
+  /* info detail panel */
   .info-detail {
     width: 94vw;
-    padding: 0.8vh 1.8vw;
-    bottom: 0.5vh;
+    padding: 1vh 2vw;
+    bottom: 0.8vh;
   }
-  .id-header { padding-bottom: 0.3vh; margin-bottom: 0.3vh; gap: 1.5vw; }
-  .id-num  { font-size: clamp(11px, 1.8vh, 20px); }
-  .id-name { font-size: clamp(6px, 1.1vh, 12px); }
+  .id-header { padding-bottom: 0.4vh; margin-bottom: 0.4vh; gap: 1.5vw; }
+  .id-num  { font-size: clamp(13px, 2.2vh, 24px); }
+  .id-name { font-size: clamp(8px, 1.3vh, 14px); }
   .id-body {
     grid-template-columns: 1fr 1px 1fr;
-    gap: 0 1vw;
-    margin-bottom: 0.3vh;
+    gap: 0 1.2vw;
+    margin-bottom: 0.4vh;
   }
-  .id-en, .id-zh { font-size: clamp(6px, 0.95vh, 10px); line-height: 1.35; }
-  .id-tools { font-size: clamp(5px, 0.85vh, 9px); }
-  .id-hint  { font-size: clamp(5px, 0.75vh, 8px); margin-top: 0.2vh; letter-spacing: 0.08em; }
+  .id-en, .id-zh { font-size: clamp(7px, 1.1vh, 12px); line-height: 1.4; }
+  .id-tools { font-size: clamp(6px, 1vh, 11px); }
+  .id-hint  { font-size: clamp(6px, 0.85vh, 9px); margin-top: 0.3vh; letter-spacing: 0.08em; }
 }
 
 /* ══════════════════════════════════════
