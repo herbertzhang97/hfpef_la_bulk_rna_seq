@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LA HFpEF Pipeline · Night City</title>
+<title>LA HFpEF Multi-Layer Bulk RNA-seq Analysis Pipeline</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Oxanium:wght@400;700;800&family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -650,6 +650,7 @@ body {
   transition: opacity 0.3s;
 }
 .info-detail.active .id-hint { display: none; }
+/* ── BILINGUAL BODY ── */
 .id-body {
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
@@ -662,9 +663,171 @@ body {
 .id-en::before { content: 'EN '; font-size: 0.75em; color: #445566; letter-spacing: 0.1em; }
 .id-zh::before { content: '中  '; font-size: 0.75em; color: #554433; letter-spacing: 0.1em; }
 
+/* ══════════════════════════════════════
+   MOBILE LANDSCAPE  (height ≤ 600px)
+   ══════════════════════════════════════ */
+@media (max-height: 600px) and (orientation: landscape) {
+
+  body {
+    padding-top: 0.5vh;
+    align-items: flex-start;
+  }
+
+  /* hide ALL neon signs — too cluttered on small screens */
+  .neon-sign { display: none !important; }
+
+  .scene {
+    width: 99vw;
+    height: 60vh;
+  }
+
+  .billboard {
+    padding: 0.4vh 0.8vw;
+    gap: 0.35vh;
+  }
+
+  /* title */
+  .title-main { font-size: clamp(8px, 1.8vh, 16px); letter-spacing: 0.08em; }
+  .title-sub  { font-size: clamp(6px, 0.95vh, 10px); margin-top: 0.1vh; }
+  .title-line { height: 1px; }
+
+  /* upstream */
+  .upstream-row { flex: 1.4; padding: 0 0.6vw; gap: 0.35vw; }
+  .badge {
+    width: clamp(16px, 2.8vh, 26px);
+    height: clamp(16px, 2.8vh, 26px);
+    font-size: clamp(7px, 1.3vh, 13px);
+  }
+  .upstream-label { font-size: clamp(7px, 1.3vh, 13px); }
+  .tool-box .tname { font-size: clamp(7px, 1.3vh, 13px); }
+  .tool-box .tsub  { font-size: clamp(5px, 0.95vh, 9px); }
+  .input-box .label,
+  .output-box .label { font-size: clamp(5px, 0.95vh, 9px); }
+  .arrow { font-size: clamp(7px, 1.1vh, 11px); }
+
+  /* branches */
+  .branches { gap: 0.35vh; flex: 5.5; }
+  .branch-row { gap: 0.25vw; }
+  .branch-tag {
+    width: 4vw;
+    padding: 0.4vh 0.2vw;
+  }
+  .branch-tag .letter { font-size: clamp(13px, 2.7vh, 24px); }
+  .branch-tag .bname  { font-size: clamp(4px, 0.8vh, 8px); margin-top: 0.1vh; }
+  .branch-arrow { font-size: clamp(7px, 1vh, 11px); }
+
+  /* nodes */
+  .nodes { gap: 0.25vw; }
+  .node { padding: 0.25vh 0.4vw; }
+  .node-num  { font-size: clamp(11px, 2.1vh, 20px); top: 0.15vh; right: 0.25vw; }
+  .node-name { font-size: clamp(6px, 1.2vh, 12px); margin-bottom: 0.1vh; padding-right: 0.8vw; }
+  .node-desc { font-size: clamp(5px, 0.85vh, 8px); line-height: 1.2; }
+  .node-arrow { font-size: clamp(6px, 0.9vh, 9px); }
+
+  /* legend */
+  .legend { padding-top: 0.25vh; gap: 1.2vw; }
+  .legend-item { font-size: clamp(5px, 0.85vh, 9px); gap: 0.25vw; }
+  .legend-dot  { width: clamp(6px, 0.9vh, 9px); height: clamp(6px, 0.9vh, 9px); }
+
+  /* info detail panel — compact single column */
+  .info-detail {
+    width: 94vw;
+    padding: 0.8vh 1.8vw;
+    bottom: 0.5vh;
+  }
+  .id-header { padding-bottom: 0.3vh; margin-bottom: 0.3vh; gap: 1.5vw; }
+  .id-num  { font-size: clamp(11px, 1.8vh, 20px); }
+  .id-name { font-size: clamp(6px, 1.1vh, 12px); }
+  .id-body {
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0 1vw;
+    margin-bottom: 0.3vh;
+  }
+  .id-en, .id-zh { font-size: clamp(6px, 0.95vh, 10px); line-height: 1.35; }
+  .id-tools { font-size: clamp(5px, 0.85vh, 9px); }
+  .id-hint  { font-size: clamp(5px, 0.75vh, 8px); margin-top: 0.2vh; letter-spacing: 0.08em; }
+}
+
+/* ══════════════════════════════════════
+   PORTRAIT ROTATE OVERLAY (mobile only)
+   ══════════════════════════════════════ */
+#rotate-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #030200;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4vh;
+}
+#rotate-overlay.show { display: flex; }
+
+.rotate-icon {
+  width: 80px; height: 80px;
+  border: 3px solid #FFE000;
+  border-radius: 14px;
+  box-shadow: 0 0 20px #FFE00066;
+  position: relative;
+  animation: do-rotate 2.5s ease-in-out infinite;
+}
+.rotate-icon::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px; height: 24px;
+  border: 2px solid #FFE000;
+  border-radius: 3px;
+  opacity: 0.7;
+}
+.rotate-icon::after {
+  content: '↻';
+  position: absolute;
+  top: -18px; right: -18px;
+  font-size: 22px;
+  color: #FFE000;
+  text-shadow: 0 0 10px #FFE000;
+}
+@keyframes do-rotate {
+  0%   { transform: rotate(0deg);  box-shadow: 0 0 20px #FFE00066; }
+  40%  { transform: rotate(90deg); box-shadow: 0 0 35px #FFE000AA; }
+  60%  { transform: rotate(90deg); box-shadow: 0 0 35px #FFE000AA; }
+  100% { transform: rotate(0deg);  box-shadow: 0 0 20px #FFE00066; }
+}
+.rotate-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(14px, 5vw, 22px);
+  color: #FFE000;
+  text-shadow: 0 0 15px #FFE000;
+  letter-spacing: 0.15em;
+  text-align: center;
+  padding: 0 6vw;
+}
+.rotate-sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(10px, 3.5vw, 15px);
+  color: #554422;
+  letter-spacing: 0.08em;
+  text-align: center;
+  line-height: 2;
+  padding: 0 8vw;
+}
+.rotate-sub span { color: #FF5500; }
+
 </style>
 </head>
 <body>
+
+<div id="rotate-overlay">
+  <div class="rotate-icon"></div>
+  <div class="rotate-title">ROTATE DEVICE<br>请横屏查看</div>
+  <div class="rotate-sub">
+    This pipeline viewer is optimised<br>for <span>landscape orientation</span><br>
+    本页面针对横屏模式优化显示
+  </div>
+</div>
 
 <div class="city-bg"></div>
 <canvas class="rain-canvas" id="rain"></canvas>
@@ -945,28 +1108,35 @@ function drawRain() {
 }
 drawRain();
 
-// ── STAGGERED CARD ANIMATION ──
-document.querySelectorAll('.info-card').forEach((card, i) => {
-  card.style.animationDelay = `${0.3 + i * 0.07}s`;
-});
+// ── MOBILE DETECTION + PORTRAIT OVERLAY ──
+const overlay = document.getElementById('rotate-overlay');
+
+function isMobile() {
+  return navigator.maxTouchPoints > 0 && window.screen.width < 1280;
+}
+
+function checkOrientation() {
+  if (!isMobile()) { overlay.classList.remove('show'); return; }
+  const portrait = window.innerHeight > window.innerWidth;
+  overlay.classList.toggle('show', portrait);
+}
 
 // ── MODULE HOVER DETAIL ──
-const detail    = document.getElementById('infoDetail');
-const idNum     = document.getElementById('idNum');
-const idName    = document.getElementById('idName');
-const idDesc    = document.getElementById('idDesc');
-const idTools   = document.getElementById('idTools');
+const detail   = document.getElementById('infoDetail');
+const idNum    = document.getElementById('idNum');
+const idName   = document.getElementById('idName');
+const idTools  = document.getElementById('idTools');
 
 const colorClasses = ['color-cyan','color-yellow','color-orange','color-red'];
 
 function showDetail(el) {
   const num    = el.dataset.num;
   const name   = el.dataset.name;
-  const desc   = el.dataset.desc   || '';
   const descEn = el.dataset.descEn || '';
+  const desc   = el.dataset.desc   || '';
   const tools  = el.dataset.tools  || '';
   const color  = el.dataset.color;
-  idNum.textContent = num;
+  idNum.textContent  = num;
   idName.textContent = name;
   document.getElementById('idDescEn').textContent = descEn;
   document.getElementById('idDescZh').textContent = desc;
@@ -986,12 +1156,24 @@ document.querySelectorAll('.node[data-num], .upstream-row[data-num]').forEach(el
   el.style.cursor = 'crosshair';
   el.addEventListener('mouseenter', () => showDetail(el));
   el.addEventListener('mouseleave', hideDetail);
+  el.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    showDetail(el);
+  }, { passive: false });
 });
+
+document.addEventListener('touchstart', (e) => {
+  if (!e.target.closest('[data-num]')) hideDetail();
+}, { passive: true });
 
 window.addEventListener('resize', () => {
   canvas.width  = window.innerWidth;
   canvas.height = window.innerHeight;
+  checkOrientation();
 });
+
+checkOrientation();
+window.addEventListener('orientationchange', () => setTimeout(checkOrientation, 250));
 </script>
 </body>
 </html>
